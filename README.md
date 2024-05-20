@@ -1,12 +1,7 @@
-# React SaaS Template
-Remains of a SaaS business I once tried to build. Now transformed into a template for building an SaaS/admin application using React + Material-UI.
+# Indoor Asset Tracking Platform
+Frontend for the saas platform to monitor and track asset location in indoor locations.
 
-[**Check out the demo**](https://reactsaastemplate.com)
-
-![Node.js CI](https://github.com/dunky11/react-saas-template/workflows/Node.js%20CI/badge.svg)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-
-[<img src="/.github/gifs/showcase.gif">](https://reactsaastemplate.com "Go to demo website")
+[**Check out how much its done**](https://indoor-tracking-saas.vercel.app/)
 
 
 ## Getting Started
