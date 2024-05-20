@@ -139,8 +139,8 @@ function SiteDetailsPage(props) {
                 key={index}
                 className={classes.dot}
                 style={{
-                  left: `${Math.min(Math.max(position[0] * imageWidth / maxX, 5), 95)}%`,
-                  top: `${Math.min(Math.max(position[1] * imageHeight / maxY, 5), 95)}%`,
+                  left: `${Math.min(Math.max(position[0] * 100 / maxX, 5), 95)}%`,
+                  top: `${Math.min(Math.max(position[1] * 100 / maxY, 5), 95)}%`,
                   
                   
                   backgroundColor: color, // Assign color
