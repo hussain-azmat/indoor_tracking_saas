@@ -77,6 +77,40 @@ function RegisterDialog(props) {
             margin="normal"
             required
             fullWidth
+            //error={status === "invalidEmail"}
+            label="Name:"
+            autoFocus
+            autoComplete="off"
+            type="name"
+            // onChange={() => {
+            //   if (status === "invalidEmail") {
+            //     setStatus(null);
+            //   }
+            // }}
+            // FormHelperTextProps={{ error: true }}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            //error={status === "invalidEmail"}
+            label="username/userid "
+            autoFocus
+            autoComplete="off"
+            type="userid"
+            // onChange={() => {
+            //   if (status === "invalidEmail") {
+            //     setStatus(null);
+            //   }
+            // }}
+            // FormHelperTextProps={{ error: true }}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
             error={status === "invalidEmail"}
             label="Email Address"
             autoFocus

@@ -75,8 +75,8 @@ function Posts(props) {
   }, [selectPosts]);
 
   useEffect(() => {
-    //handleSiteClick(selectedSite);
-    console.log("Site Data inside useEffect:", selectedSite); // Log selected site data
+    handleSiteClick(selectedSite);
+    //console.log("Site Data -> useEffect:", selectedSite); // Log selected site data
   }, [selectedSite])
 
   if (isAddPostPaperOpen) {
@@ -95,7 +95,7 @@ function Posts(props) {
   }
   //console.log("Selected Site:", selectedSite);
   if (selectedSite) {
-    console.log("If Selected Site:", selectedSite); // Log selected site data
+    //console.log("If Selected Site:", selectedSite); // Log selected site data
     return <SiteDetailsPage site={selectedSite} anchors={anchors} numAssets={numAssets}/>;
   }
 
