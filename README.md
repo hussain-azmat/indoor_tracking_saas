@@ -25,12 +25,12 @@ Frontend for the saas platform to monitor and track asset location in indoor loc
 1. Clone the repository
 
    ```
-   git clone https://github.com/dunky11/react-saas-template
+   git clone https://github.com/hussain-azmat/indoor_tracking_saas
    ```
 2. Install dependencies, this can take a minute
 
    ```
-   cd react-saas-template
+   cd indoor_tracking_saas
    npm install
    ```
 3. Start the local server
@@ -72,8 +72,6 @@ It will create a folder named build with your compiled project inside. After tha
 * [React-Cropper](https://github.com/roadmanfong/react-cropper) - Cropper for the image uploads
 * [React-Stripe-js](https://github.com/stripe/react-stripe-js) - Stripes payment elements
 
-## Contribute
-Show your support by ⭐ the project. Pull requests are always welcome.
 
 ## License
 
