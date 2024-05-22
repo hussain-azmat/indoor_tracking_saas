@@ -6,9 +6,6 @@ import withStyles from "@mui/styles/withStyles";
 import ZoomImage from "../../../shared/components/ZoomImage";
 import smoothScrollTop from "../../../shared/functions/smoothScrollTop";
 import Trilateration from './Trilateration'; // Add this line to import the Trilateration component
-//import classNames from "classnames";
-//import AddPost from "./AddPost";
-//import BlogCard from "../../../logged_out/components/blog/BlogCard";
 
 const styles = (theme) => ({
   blogContentWrapper: {
@@ -49,30 +46,10 @@ const styles = (theme) => ({
 function SiteDetailsPage(props) {
   const { classes, site, anchors, numAssets } = props;
 
-  //const [image, setImage] = useState(0);
-  // const [imageWidth, setImageWidth] = useState(0);
-  // const [imageHeight, setImageHeight] = useState(0);
   const [estimatedPosition, setEstimatedPosition] = useState(null);
 
   console.log("Estimated Position:", estimatedPosition);
 
-
-  //const [anchors, setAnchors] = useState([]);
-  //const [numAssets, setAssets] = useState([]);
-  //const [isModalOpen, setIsModalOpen] = useState(false);
-  // const updateAnchors = useCallback((newAnchors) => {
-  //   // Update the anchors array with the new data
-  //   setAnchors(newAnchors);
-  // }, []);
-
-  // const updateNumAssets = useCallback((newAssets) => {
-  //   // Update the assets array with the new data
-  //   setAssets(newAssets);
-  // }, []);
-
-  //console.log(typeof updateAnchors, typeof updateNumAssets);
-  //console.log("Number of Assets: ", numAssets);
-  // Extract uid values from anchors
   const transmitterSerialNumbers = anchors.map(anchor => anchor.uid);
   const [imageWidth, setImageWidth] = useState(0);
   const [imageHeight, setImageHeight] = useState(0);

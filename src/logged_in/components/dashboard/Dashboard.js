@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Typography, Box } from "@mui/material";
-import SettingsArea from "./SettingsArea";
+//import SettingsArea from "./SettingsArea";
 //import UserDataArea from "./UserDataArea";
 import AccountInformationArea from "./AccountInformationArea";
 import StatisticsArea from "./StatisticsArea";
@@ -12,7 +12,7 @@ function Dashboard(props) {
     CardChart,
     statistics,
     toggleAccountActivation,
-    pushMessageToSnackbar,
+    //pushMessageToSnackbar,
     isAccountActivated,
   } = props;
 
@@ -30,12 +30,12 @@ function Dashboard(props) {
         isAccountActivated={isAccountActivated}
         toggleAccountActivation={toggleAccountActivation}
       />
-      <Box mt={4}>
+      {/* <Box mt={4}>
         <Typography variant="subtitle1" gutterBottom>
           Settings
         </Typography>
       </Box>
-      <SettingsArea pushMessageToSnackbar={pushMessageToSnackbar} />
+      <SettingsArea pushMessageToSnackbar={pushMessageToSnackbar} /> */}
       {/* <UserDataArea
         pushMessageToSnackbar={pushMessageToSnackbar}
         targets={targets}

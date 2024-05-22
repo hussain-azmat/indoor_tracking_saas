@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import PostContent from "./PostContent";
 import AddPost from "./AddPost";
 import SiteDetailsPage from "./SiteDetailsPage";
-//import { v4 as uuidv4 } from 'uuid'; // Import uuidv4 function from uuid library
 
 
 function Posts(props) {
@@ -19,14 +18,10 @@ function Posts(props) {
     setPosts,
   } = props;
   const [isAddPostPaperOpen, setIsAddPostPaperOpen] = useState(false);
+  
   // eslint-disable-next-line
-  //const [selectedPost, setSelectedPost] = useState(null);
   const [selectedSite, setSelectedSite] = useState(null);
   
-  // Function to generate a unique ID for a new site
-  // const generateUniqueId = useCallback(() => {
-  //   return uuidv4(); // Generate UUID using uuidv4 function
-  // }, []);
 
   const [anchors, setAnchors] = useState([]);
   const [numAssets, setAssets] = useState([]);
@@ -54,11 +49,6 @@ function Posts(props) {
     setPosts((prevPosts) => [...prevPosts, newPost ]);
   }, [setPosts]);
 
-  // const handleSiteClick = useCallback((site) => {
-  //   setSelectedSite(site);
-  //   console.log("Site Data:", site); // Log selected site data
-  //   //console.log("Selected Site:", selectedSite);
-  // }, []);
 
   const handleSiteClick = (site) => {
     setSelectedSite(site);

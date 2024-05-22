@@ -47,21 +47,35 @@ function LoginDialog(props) {
   const login = useCallback(() => {
     setIsLoading(true);
     setStatus(null);
-    if (loginEmail.current.value !== "test@web.com") {
-      setTimeout(() => {
-        setStatus("invalidEmail");
+
+    // Extract the data
+    const data = {
+      email: loginEmail.current.value,
+      password: loginPassword.current.value,
+    };
+
+    // Send the data to the backend
+    fetch('https://uwb-backend.onrender.com/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((result) => {
         setIsLoading(false);
-      }, 1500);
-    } else if (loginPassword.current.value !== "HaRzwc") {
-      setTimeout(() => {
-        setStatus("invalidPassword");
+        if (result.success) {
+          localStorage.setItem('username', result.name); // Assuming the name is returned from the backend
+          history.push("/c/dashboard");
+        } else {
+          setStatus(result.message);
+        }
+      })
+      .catch((error) => {
         setIsLoading(false);
-      }, 1500);
-    } else {
-      setTimeout(() => {
-        history.push("/c/dashboard");
-      }, 150);
-    }
+        console.error('Error:', error);
+      });
   }, [setIsLoading, loginEmail, loginPassword, history, setStatus]);
 
   return (
@@ -135,14 +149,12 @@ function LoginDialog(props) {
             />
             {status === "verificationEmailSend" ? (
               <HighlightedInformation>
-                We have send instructions on how to reset your password to your
-                email address
+                We have sent instructions on how to reset your password to your
+                email address.
               </HighlightedInformation>
             ) : (
               <HighlightedInformation>
-                Email is: <b>test@web.com</b>
-                <br />
-                Password is: <b>HaRzwc</b>
+                Use your registered email and password to login.
               </HighlightedInformation>
             )}
           </Fragment>

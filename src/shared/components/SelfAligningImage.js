@@ -5,6 +5,7 @@ import { ImageListItemBar } from "@mui/material";
 import withStyles from '@mui/styles/withStyles';
 import VertOptions from "./VertOptions";
 
+
 const styles = {
   imageContainer: {
     width: "100%",
@@ -33,6 +34,7 @@ function SelfAligningImage(props) {
     roundedBorder,
     theme,
     onClick, // Add onClick prop
+    onImageClick,
   } = props;
   const img = useRef();
   const [hasMoreWidthThanHeight, setHasMoreWidthThanHeight] = useState(null);
@@ -61,6 +63,7 @@ function SelfAligningImage(props) {
         onLoad={onLoad}
         src={src}
         alt=""
+        onClick={onImageClick} // Attach onImageClick handler
       />
       {title && (
         <ImageListItemBar

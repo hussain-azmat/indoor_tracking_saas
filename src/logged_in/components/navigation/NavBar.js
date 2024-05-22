@@ -20,7 +20,7 @@ import {
 import withStyles from "@mui/styles/withStyles";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ImageIcon from "@mui/icons-material/Image";
-import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+//import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import MenuIcon from "@mui/icons-material/Menu";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
@@ -149,6 +149,14 @@ function NavBar(props) {
     setIsSideDrawerOpen(false);
   }, [setIsSideDrawerOpen]);
 
+  const handleLogout = () => {
+    // Clear authentication data from local storage
+    localStorage.removeItem("loginPassword");
+    localStorage.removeItem("loginEmail");
+    
+    
+  };
+
   const menuItems = [
     {
       link: "/c/dashboard",
@@ -182,27 +190,28 @@ function NavBar(props) {
         mobile: <ImageIcon className="text-white" />,
       },
     },
-    {
-      link: "/c/subscription",
-      name: "Subscription",
-      onClick: closeMobileDrawer,
-      icon: {
-        desktop: (
-          <AccountBalanceIcon
-            className={
-              selectedTab === "Subscription"
-                ? classes.textPrimary
-                : "text-white"
-            }
-            fontSize="small"
-          />
-        ),
-        mobile: <AccountBalanceIcon className="text-white" />,
-      },
-    },
+    // {
+    //   link: "/c/subscription",
+    //   name: "Subscription",
+    //   onClick: closeMobileDrawer,
+    //   icon: {
+    //     desktop: (
+    //       <AccountBalanceIcon
+    //         className={
+    //           selectedTab === "Subscription"
+    //             ? classes.textPrimary
+    //             : "text-white"
+    //         }
+    //         fontSize="small"
+    //       />
+    //     ),
+    //     mobile: <AccountBalanceIcon className="text-white" />,
+    //   },
+    // },
     {
       link: "/",
       name: "Logout",
+      onClick: handleLogout,
       icon: {
         desktop: (
           <PowerSettingsNewIcon className="text-white" fontSize="small" />
@@ -245,14 +254,14 @@ function NavBar(props) {
             >
               <Avatar
                 alt="profile picture"
-                src={`${process.env.PUBLIC_URL}/images/logged_in/profilePicture.jpg`}
+                src={`${process.env.PUBLIC_URL}/images/logged_in/m yProfile.jpg`}
                 className={classNames(classes.accountAvatar)}
               />
               {isWidthUpSm && (
                 <ListItemText
                   className={classes.username}
                   primary={
-                    <Typography color="textPrimary">Username</Typography>
+                    <Typography color="textPrimary"> {props.username} </Typography>
                   }
                 />
               )}
@@ -338,6 +347,7 @@ NavBar.propTypes = {
   selectedTab: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
   openAddBalanceDialog: PropTypes.func.isRequired,
+  
 };
 
 export default withStyles(styles, { withTheme: true })(NavBar);

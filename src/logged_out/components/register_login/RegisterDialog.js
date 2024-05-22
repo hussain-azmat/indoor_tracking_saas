@@ -32,6 +32,8 @@ function RegisterDialog(props) {
   const registerTermsCheckbox = useRef();
   const registerPassword = useRef();
   const registerPasswordRepeat = useRef();
+  const registerName = useRef();
+  const registerEmail = useRef();
 
   const register = useCallback(() => {
     if (!registerTermsCheckbox.current.checked) {
@@ -46,9 +48,35 @@ function RegisterDialog(props) {
     }
     setStatus(null);
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
+
+    // Extract the data
+    const data = {
+      name: registerName.current.value,
+      email: registerEmail.current.value,
+      password: registerPassword.current.value,
+    };
+
+    // Send the data to the backend
+    fetch('https://uwb-backend.onrender.com/signup', {  // Replace with your backend API URL
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        setIsLoading(false);
+        if (result.success) {
+          setStatus("accountCreated");
+        } else {
+          setStatus(result.message);
+        }
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.error('Error:', error);
+      });
   }, [
     setIsLoading,
     setStatus,
@@ -56,6 +84,8 @@ function RegisterDialog(props) {
     registerPassword,
     registerPasswordRepeat,
     registerTermsCheckbox,
+    registerName,
+    registerEmail,
   ]);
 
   return (
@@ -77,34 +107,10 @@ function RegisterDialog(props) {
             margin="normal"
             required
             fullWidth
-            //error={status === "invalidEmail"}
-            label="Name:"
+            label="Name"
             autoFocus
             autoComplete="off"
-            type="name"
-            // onChange={() => {
-            //   if (status === "invalidEmail") {
-            //     setStatus(null);
-            //   }
-            // }}
-            // FormHelperTextProps={{ error: true }}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            //error={status === "invalidEmail"}
-            label="username/userid "
-            autoFocus
-            autoComplete="off"
-            type="userid"
-            // onChange={() => {
-            //   if (status === "invalidEmail") {
-            //     setStatus(null);
-            //   }
-            // }}
-            // FormHelperTextProps={{ error: true }}
+            inputRef={registerName}
           />
           <TextField
             variant="outlined"
@@ -113,9 +119,9 @@ function RegisterDialog(props) {
             fullWidth
             error={status === "invalidEmail"}
             label="Email Address"
-            autoFocus
             autoComplete="off"
             type="email"
+            inputRef={registerEmail}
             onChange={() => {
               if (status === "invalidEmail") {
                 setStatus(null);
@@ -147,7 +153,7 @@ function RegisterDialog(props) {
                 return "Create a password at least 6 characters long.";
               }
               if (status === "passwordsDontMatch") {
-                return "Your passwords dont match.";
+                return "Your passwords don't match.";
               }
               return null;
             })()}
@@ -179,7 +185,7 @@ function RegisterDialog(props) {
                 return "Create a password at least 6 characters long.";
               }
               if (status === "passwordsDontMatch") {
-                return "Your passwords dont match.";
+                return "Your passwords don't match.";
               }
             })()}
             FormHelperTextProps={{ error: true }}

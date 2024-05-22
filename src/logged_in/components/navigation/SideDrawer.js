@@ -25,7 +25,7 @@ function SideDrawer(props) {
           width="100%"
           alignItems="center"
         >
-          <Typography variant="h6">A Sidedrawer</Typography>
+          <Typography variant="h6">More Options</Typography>
           <IconButton
             onClick={onClose}
             color="primary"

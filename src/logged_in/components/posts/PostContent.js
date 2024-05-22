@@ -33,6 +33,7 @@ function PostContent(props) {
   const history = useHistory();
   const [page, setPage] = useState(0);
   const [isDeletePostDialogOpen, setIsDeletePostDialogOpen] = useState(false);
+  const [postToDelete, setPostToDelete] = useState(null);
   const [isDeletePostDialogLoading, setIsDeletePostDialogLoading] = useState(
     false
   );
@@ -40,53 +41,31 @@ function PostContent(props) {
   const closeDeletePostDialog = useCallback(() => {
     setIsDeletePostDialogOpen(false);
     setIsDeletePostDialogLoading(false);
+    setPostToDelete(null);
   }, [setIsDeletePostDialogOpen, setIsDeletePostDialogLoading]);
 
-  // const deletePost = useCallback(() => {
-  //   setIsDeletePostDialogLoading(true);
-  //   setTimeout(() => {
-  //     const _posts = [...posts];
-  //     const index = _posts.findIndex((element) => element.id === deletePost);
-  //     if (index !== -1) {
-  //       const _posts = [...posts];
-  //       _posts.splice(index, 1);
-  //       setPosts(_posts);
-  //       pushMessageToSnackbar({
-  //         text: "Your site has been deleted",
-  //       });
-  //     } else {
-  //       console.error("Post not found");
-  //     }
-  //     // _posts.splice(index, 1);
-  //     // setPosts(_posts);
-  //     // pushMessageToSnackbar({
-  //     //   text: "Your site has been deleted",
-  //     // });
-  //     closeDeletePostDialog();
-  //   }, 1500);
-  // }, [
-  //   posts,
-  //   setPosts,
-  //   setIsDeletePostDialogLoading,
-  //   pushMessageToSnackbar,
-  //   closeDeletePostDialog,
-  // ]);
-  const deletePost = useCallback((post) => {
+
+  const deletePost = useCallback(() => {
+    if (!postToDelete) return;
+
     setIsDeletePostDialogLoading(true);
     setTimeout(() => {
-      const updatedPosts = posts.filter((p) => p.id !== post.id);
+      const updatedPosts = posts.filter((p) => p.id !== postToDelete.id);
       setPosts(updatedPosts);
       pushMessageToSnackbar({
         text: "Your site has been deleted",
       });
       closeDeletePostDialog();
     }, 1500);
-  }, [posts, setPosts, pushMessageToSnackbar, closeDeletePostDialog]);
+  }, [posts, setPosts, pushMessageToSnackbar, setIsDeletePostDialogLoading, closeDeletePostDialog, postToDelete]);
 
-  const onDelete = useCallback(() => {
+  
+  const onDelete = useCallback((post) => {
+    setPostToDelete(post); // Store the post to be deleted
     setIsDeletePostDialogOpen(true);
-  }, [setIsDeletePostDialogOpen]);
+  }, [setIsDeletePostDialogOpen, setPostToDelete]);
 
+  
   const handleChangePage = useCallback(
     (__, page) => {
       setPage(page);
@@ -96,12 +75,22 @@ function PostContent(props) {
   
   
   const navigateToSiteDetails = useCallback((post) => {
+    
     //console.log("ID in PC:"+ postId);
     onSiteClick(post);
     //history.push(`/site/${post.id}`);
     history.push(`./posts/${post.id}`);
   }, [history, onSiteClick]);
 
+    // Click handler for the image
+    const handleImageClick = useCallback((post) => {
+      navigateToSiteDetails(post);
+    }, [navigateToSiteDetails]);
+  
+    // Click handler for the title
+    const handleTitleClick = useCallback((post) => {
+      navigateToSiteDetails(post);
+    }, [navigateToSiteDetails]);
   
   const printImageGrid = useCallback(() => {
     if (posts.length > 0) {
@@ -114,22 +103,22 @@ function PostContent(props) {
                 <Grid item xs={6} sm={4} md={3} key={post.id}>
                   
                   <SelfAligningImage
-                    
                     src={post.src}
                     title={post.name}
-                    //description={post.description}
-                    //timeStamp={post.timestamp}
+                    //onClick={() => navigateToSiteDetails(post)} // Add onClick event to handle post click
+                    onImageClick={() => handleImageClick(post)}
+                    onTitleClick={() => handleTitleClick(post)}
+
                     options={[
                       {
                         name: "Delete",
                         onClick: () => {
+                          //e.stopPropagation(); // Prevent event propagation to the parent element
                           onDelete(post);
                         },
                         icon: <DeleteIcon />,
                       },
                     ]}
-                    onClick={() => navigateToSiteDetails(post)} // Add onClick event to handle post click
-
                   />
                 </Grid>
               ))}
@@ -144,7 +133,7 @@ function PostContent(props) {
         </HighlightedInformation>
       </Box>
     );
-  }, [posts, onDelete, page, navigateToSiteDetails]);
+  }, [posts, onDelete, page, handleImageClick, handleTitleClick]);
 
   return (
     <Paper>
