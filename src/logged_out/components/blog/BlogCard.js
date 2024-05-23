@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import format from "date-fns/format";
+//import format from "date-fns/format";
 import classNames from "classnames";
 import { Typography, Card, Box } from "@mui/material";
 
@@ -52,7 +52,7 @@ const styles = (theme) => ({
 });
 
 function BlogCard(props) {
-  const { classes, url, src, date, title, snippet } = props;
+  const { classes, url, src, title, snippet } = props;
 
   return (
     <Card className={classes.card}>
@@ -63,9 +63,9 @@ function BlogCard(props) {
       )}
       <Box p={2}>
         <Typography variant="body2" color="textSecondary">
-          {format(new Date(date * 1000), "PPP", {
+          {/* {format(new Date(date * 1000), "PPP", {
             awareOfUnicodeTokens: true,
-          })}
+          })} */}
         </Typography>
         <Link
           to={url}

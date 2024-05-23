@@ -1,6 +1,6 @@
 const data = [
   {
-    src: `${process.env.PUBLIC_URL}/images/logged_in/map.jpg`,
+    src: `${process.env.PUBLIC_URL}/images/logged_in/map.jpeg`,
     name: "R&D Section",
   },
   {

@@ -2,6 +2,8 @@ import React, { Fragment, useRef, useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import {useDispatch} from "react-redux";
+// import { authActions } from "../redux/store";
 import {
   AppBar,
   Toolbar,
@@ -29,6 +31,8 @@ import SideDrawer from "./SideDrawer";
 //import Balance from "./Balance";
 import NavigationDrawer from "../../../shared/components/NavigationDrawer";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { authActions } from "../redux/store";
+import { useHistory } from "react-router-dom";
 
 const styles = (theme) => ({
   appBar: {
@@ -132,6 +136,7 @@ function NavBar(props) {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
   const isWidthUpSm = useMediaQuery(theme.breakpoints.up("sm"));
+  //const histroy = useHistory(null);
 
   const openMobileDrawer = useCallback(() => {
     setIsMobileOpen(true);
@@ -148,13 +153,17 @@ function NavBar(props) {
   const closeDrawer = useCallback(() => {
     setIsSideDrawerOpen(false);
   }, [setIsSideDrawerOpen]);
-
+  
+  const dispatch = useDispatch();
+  const history = useHistory();
   const handleLogout = () => {
+    dispatch(authActions.logout());
     // Clear authentication data from local storage
-    localStorage.removeItem("loginPassword");
-    localStorage.removeItem("loginEmail");
-    
-    
+    localStorage.clear();
+  
+    // Redirect to the login page
+    history.replace("/login");
+    window.location.reload();
   };
 
   const menuItems = [
@@ -254,7 +263,7 @@ function NavBar(props) {
             >
               <Avatar
                 alt="profile picture"
-                src={`${process.env.PUBLIC_URL}/images/logged_in/m yProfile.jpg`}
+                src={`${process.env.PUBLIC_URL}/images/logged_in/myProfile.jpg`}
                 className={classNames(classes.accountAvatar)}
               />
               {isWidthUpSm && (

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import format from "date-fns/format";
+//import format from "date-fns/format";
 import { Grid, Typography, Card, Box } from "@mui/material";
 import withStyles from '@mui/styles/withStyles';
 import BlogCard from "./BlogCard";
@@ -33,7 +33,7 @@ const styles = (theme) => ({
 });
 
 function BlogPost(props) {
-  const { classes, date, title, src, content, otherArticles } = props;
+  const { classes,  title, src, content, otherArticles } = props;
 
   useEffect(() => {
     document.title = `${title}`;
@@ -55,9 +55,9 @@ function BlogPost(props) {
                   <b>{title}</b>
                 </Typography>
                 <Typography variant="body1" color="textSecondary">
-                  {format(new Date(date * 1000), "PPP", {
+                  {/* {format(new Date(date * 1000), "PPP", {
                     awareOfUnicodeTokens: true,
-                  })}
+                  })} */}
                 </Typography>
               </Box>
               <ZoomImage className={classes.img} src={src} alt="" />

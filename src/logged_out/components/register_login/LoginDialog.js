@@ -8,6 +8,8 @@ import FormDialog from "../../../shared/components/FormDialog";
 import HighlightedInformation from "../../../shared/components/HighlightedInformation";
 import ButtonCircularProgress from "../../../shared/components/ButtonCircularProgress";
 import VisibilityPasswordTextField from "../../../shared/components/VisibilityPasswordTextField";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../../logged_in/components/redux/store";
 
 const styles = (theme) => ({
   forgotPassword: {
@@ -43,7 +45,7 @@ function LoginDialog(props) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const loginEmail = useRef();
   const loginPassword = useRef();
-
+  const dispatch = useDispatch();
   const login = useCallback(() => {
     setIsLoading(true);
     setStatus(null);
@@ -66,7 +68,9 @@ function LoginDialog(props) {
       .then((result) => {
         setIsLoading(false);
         if (result.success) {
-          localStorage.setItem('username', result.name); // Assuming the name is returned from the backend
+          localStorage.setItem('username', result?.name); // Assuming the name is returned from the backend
+          
+          dispatch(authActions.login());
           history.push("/c/dashboard");
         } else {
           setStatus(result.message);
@@ -76,7 +80,7 @@ function LoginDialog(props) {
         setIsLoading(false);
         console.error('Error:', error);
       });
-  }, [setIsLoading, loginEmail, loginPassword, history, setStatus]);
+  }, [dispatch, setIsLoading, loginEmail, loginPassword, history, setStatus]);
 
   return (
     <Fragment>

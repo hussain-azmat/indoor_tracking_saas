@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
   YAxis,
 } from "recharts";
-import format from "date-fns/format";
+//import format from "date-fns/format";
 import { Card, CardContent, Typography, IconButton, Menu, MenuItem, Box } from "@mui/material";
 import withStyles from '@mui/styles/withStyles';
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -20,7 +20,7 @@ const styles = (theme) => ({
 });
 
 function labelFormatter(label) {
-  return format(new Date(label * 1000), "MMMM d, p yyyy");
+  //return format(new Date(label * 1000), "MMMM d, p yyyy");
 }
 
 function calculateMin(data, yKey, factor) {
