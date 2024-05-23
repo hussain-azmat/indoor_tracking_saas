@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
-import { useHistory } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 import { Grid, TablePagination, Divider, Toolbar, Typography, Button, Paper, Box } from "@mui/material";
 import withStyles from '@mui/styles/withStyles';
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -30,7 +30,7 @@ function PostContent(props) {
     onSiteClick,
   } = props;
 
-  const history = useHistory();
+  //const history = useHistory();
   const [page, setPage] = useState(0);
   const [isDeletePostDialogOpen, setIsDeletePostDialogOpen] = useState(false);
   const [postToDelete, setPostToDelete] = useState(null);
@@ -75,12 +75,11 @@ function PostContent(props) {
   
   
   const navigateToSiteDetails = useCallback((post) => {
-    
     //console.log("ID in PC:"+ postId);
     onSiteClick(post);
     //history.push(`/site/${post.id}`);
-    history.push(`./posts/${post.id}`);
-  }, [history, onSiteClick]);
+    //history.replace(`./posts/${post.id}`);
+  }, [onSiteClick]);
 
     // Click handler for the image
     const handleImageClick = useCallback((post) => {
