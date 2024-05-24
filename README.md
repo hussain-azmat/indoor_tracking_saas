@@ -72,9 +72,6 @@ It will create a folder named build with your compiled project inside. After tha
 * [React-Cropper](https://github.com/roadmanfong/react-cropper) - Cropper for the image uploads
 * [React-Stripe-js](https://github.com/stripe/react-stripe-js) - Stripes payment elements
 
-## Contribute
-Show your support by ⭐ the project. Pull requests are always welcome.
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/dunky11/react-saas-template/blob/master/LICENSE) file for details.
