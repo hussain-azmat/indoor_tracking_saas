@@ -1,11 +1,12 @@
 import React, { useState, useCallback, useEffect } from "react";
-// import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import PropTypes from "prop-types";
 import PostContent from "./PostContent";
 import AddPost from "./AddPost";
 import SiteDetailsPage from "./SiteDetailsPage";
-// import { Card, Box, Typography } from "@mui/material";
+//import { Card, Box, Typography } from "@mui/material";
 import withStyles from '@mui/styles/withStyles';
+import axios from "axios"; // Import axios here
 
 const styles = (theme) => ({
   img: {
@@ -97,16 +98,31 @@ function Posts(props) {
     setPosts((prevPosts) => [...prevPosts, newPost ]);
   }, [setPosts]);
 
+  const handleSiteClick = useCallback(async (site) => {
+    setSelectedSite(site || null);
+    try {
+      const response = await axios.get('https://uwb-backend.onrender.com/sitesDetail', {
+        params: { name: site.name }
+      });
+      console.log("Site Details:", response.data);
+      updateAnchors(response.data.anchors); // Update with fetched data
+      updateNumAssets(response.data.numAssets); // Update with fetched data
+    } catch (error) {
+      console.error('Error fetching site details:', error);
+    }
+  }, [updateAnchors, updateNumAssets]);
 
-  const handleSiteClick = useCallback(
-    (site) => {
-      setSelectedSite(site || null);
-      updateAnchors(site?.anchors); // Assuming site has an anchors property
-      updateNumAssets(site?.numAssets); // Assuming site has a numAssets property
-      console.log("Site Data:", site); // Log selected site data
-    },
-    [updateAnchors, updateNumAssets]
-  );
+  // const handleSiteClick = useCallback(
+    
+  //   (site) => {
+  //     setSelectedSite(site || null);
+  //     updateAnchors(site?.anchors); // Assuming site has an anchors property
+  //     updateNumAssets(site?.numAssets); // Assuming site has a numAssets property
+  //     console.log("Site Data:", site); // Log selected site data
+  //   },
+  //   [updateAnchors, updateNumAssets]
+
+  // );
 
   // const handleSiteClick = (site) => {
   //   setSelectedSite(site);
@@ -171,9 +187,6 @@ Posts.propTypes = {
   setPosts: PropTypes.func.isRequired,
   pushMessageToSnackbar: PropTypes.func,
   selectPosts: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired,
-  site: PropTypes.object.isRequired,
-  siteSelection: PropTypes.func.isRequired,
   //selectedSite: PropTypes.object.isRequired,
 };
 

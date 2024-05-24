@@ -52,15 +52,16 @@ const styles = (theme) => ({
 });
 
 function BlogCard(props) {
-  const { classes, url, src, title, snippet } = props;
-
+  const { classes, src, title, snippet, onSiteClick, site } = props;
+  console.log("Inside BlogCard");
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} onClick={() => onSiteClick(site)}>
       {src && (
-        <Link to={url} tabIndex={-1}>
+        <Link to="#" tabIndex={-1}>
           <img src={src} className={classes.img} alt="" />
         </Link>
       )}
+
       <Box p={2}>
         <Typography variant="body2" color="textSecondary">
           {/* {format(new Date(date * 1000), "PPP", {
@@ -68,7 +69,7 @@ function BlogCard(props) {
           })} */}
         </Typography>
         <Link
-          to={url}
+          to="#"
           className={classNames(classes.noDecoration, classes.showFocus)}
         >
           <Typography variant="h6">
@@ -77,10 +78,11 @@ function BlogCard(props) {
         </Link>
         <Typography variant="body1" color="textSecondary">
           {snippet}
-          <Link to={url} className={classes.noDecoration} tabIndex={-1}>
+          <Link to="#" className={classes.noDecoration} tabIndex={-1}>
             <span className={classes.link}> read more...</span>
           </Link>
         </Typography>
+        
       </Box>
     </Card>
   );
@@ -93,6 +95,8 @@ BlogCard.propTypes = {
   date: PropTypes.number.isRequired,
   snippet: PropTypes.string.isRequired,
   src: PropTypes.string,
+  onSiteClick: PropTypes.func.isRequired, // Add this prop type
+  site: PropTypes.object.isRequired, // Add this prop type
 };
 
 export default withStyles(styles, { withTheme: true })(BlogCard);

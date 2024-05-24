@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { Box, Typography, Grid, Card } from "@mui/material";
+//import { Link } from 'react-router-dom';
 import withStyles from "@mui/styles/withStyles";
 import ZoomImage from "../../../shared/components/ZoomImage";
 import smoothScrollTop from "../../../shared/functions/smoothScrollTop";
@@ -153,6 +154,7 @@ function SiteDetailsPage(props) {
             </Typography>
             {filteredOtherArticles.map((site) => (
               <Box key={site.id} mb={3}>
+                
                 <BlogCard
                   title={site.name}
                   //discription={site.discription}
@@ -160,6 +162,7 @@ function SiteDetailsPage(props) {
                   src={`${site.src}`}
                   onSiteClick={() => siteSelection(site)}
                 />
+                
               </Box>
             ))}
           </Grid>
