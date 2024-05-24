@@ -69,7 +69,8 @@ function LoginDialog(props) {
         setIsLoading(false);
         if (result.success) {
           localStorage.setItem('username', result?.name); // Assuming the name is returned from the backend
-          
+          localStorage.setItem('email', data.email);
+          console.log(data.email);
           dispatch(authActions.login());
           history.push("/c/dashboard");
         } else {

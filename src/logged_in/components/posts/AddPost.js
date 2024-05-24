@@ -24,6 +24,7 @@ function AddPost(props) {
   const numAnchorsRef = useRef(null);
   const siteLabelRef = useRef(null);
   const imageUploadRef = useRef(null);
+  //const emailRef = useRef(null);  // Add a reference for the email input
 
   const [postId, setPostId] = useState(null);
   const [uploadAt, setUploadAt] = useState(new Date());
@@ -52,6 +53,8 @@ function AddPost(props) {
     const numAssets = numAssetsRef.current?.value;
     const siteLabel = siteLabelRef.current?.value;
     const imageFile = imageUploadRef.current?.files[0];
+    //const email = emailRef.current?.value;  // Get the value from the email input
+    const email = localStorage.getItem('email');
 
     // Generate a unique post ID
     const postId = uuidv4();
@@ -66,7 +69,9 @@ function AddPost(props) {
     formData.append('description', siteDescription);
     formData.append('assets', numAssets);
     formData.append('anchors', JSON.stringify(anchorValues));
-    
+    formData.append('email', email);  // Append the email to the form data
+
+    console.log(email);
     console.log(anchorValues);
 
     try {
@@ -117,6 +122,7 @@ function AddPost(props) {
     }
   }, [anchorValues, pushMessageToSnackbar, setSelectedSite, siteDescriptionRef, numAssetsRef, siteLabelRef, imageUploadRef, addPost, onClose, updateAnchors, updateNumAssets]);
   
+
   return (
     <Fragment>
       <ActionPaper

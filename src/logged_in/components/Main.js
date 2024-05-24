@@ -6,7 +6,7 @@ import Routing from "./Routing";
 import NavBar from "./navigation/NavBar";
 import ConsecutiveSnackbarMessages from "../../shared/components/ConsecutiveSnackbarMessages";
 import smoothScrollTop from "../../shared/functions/smoothScrollTop";
-import persons from "../dummy_data/persons";
+//import persons from "../dummy_data/persons";
 import LazyLoadAddBalanceDialog from "./subscription/LazyLoadAddBalanceDialog";
 
 const styles = (theme) => ({
@@ -22,12 +22,12 @@ const styles = (theme) => ({
   },
 });
 
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
+// function shuffle(array) {
+//   for (let i = array.length - 1; i > 0; i--) {
+//     let j = Math.floor(Math.random() * (i + 1));
+//     [array[i], array[j]] = [array[j], array[i]];
+//   }
+// }
 
 function Main(props) {
   const { classes } = props;
@@ -48,29 +48,30 @@ function Main(props) {
   const [statistics, setStatistics] = useState({ views: [], profit: [] });
   const [posts, setPosts] = useState([]);
   const [targets, setTargets] = useState([]);
-  const [messages, setMessages] = useState([]);
+
+  //const [messages, setMessages] = useState([]);
   const [isAccountActivated, setIsAccountActivated] = useState(false);
   const [isAddBalanceDialogOpen, setIsAddBalanceDialogOpen] = useState(false);
   const [pushMessageToSnackbar, setPushMessageToSnackbar] = useState(null);
 
-  const fetchRandomTargets = useCallback(() => {
-    const targets = [];
-    for (let i = 0; i < 35; i += 1) {
-      const randomPerson = persons[Math.floor(Math.random() * persons.length)];
-      const target = {
-        id: i,
-        number1: Math.floor(Math.random() * 251),
-        number2: Math.floor(Math.random() * 251),
-        number3: Math.floor(Math.random() * 251),
-        number4: Math.floor(Math.random() * 251),
-        name: randomPerson.name,
-        profilePicUrl: randomPerson.src,
-        isActivated: Math.round(Math.random()) ? true : false,
-      };
-      targets.push(target);
-    }
-    setTargets(targets);
-  }, [setTargets]);
+  // const fetchRandomTargets = useCallback(() => {
+  //   const targets = [];
+  //   for (let i = 0; i < 35; i += 1) {
+  //     const randomPerson = persons[Math.floor(Math.random() * persons.length)];
+  //     const target = {
+  //       id: i,
+  //       number1: Math.floor(Math.random() * 251),
+  //       number2: Math.floor(Math.random() * 251),
+  //       number3: Math.floor(Math.random() * 251),
+  //       number4: Math.floor(Math.random() * 251),
+  //       name: randomPerson.name,
+  //       profilePicUrl: randomPerson.src,
+  //       isActivated: Math.round(Math.random()) ? true : false,
+  //     };
+  //     targets.push(target);
+  //   }
+  //   setTargets(targets);
+  // }, [setTargets]);
 
   const openAddBalanceDialog = useCallback(() => {
     setIsAddBalanceDialogOpen(true);
@@ -168,51 +169,51 @@ function Main(props) {
     setTransactions(transactions);
   }, [setTransactions]);
 
-  const fetchRandomMessages = useCallback(() => {
-    shuffle(persons);
-    const messages = [];
-    const iterations = persons.length;
-    const oneDaySeconds = 60 * 60 * 24;
-    let curUnix = Math.round(
-      new Date().getTime() / 1000 - iterations * oneDaySeconds
-    );
-    for (let i = 0; i < iterations; i += 1) {
-      const person = persons[i];
-      const message = {
-        id: i,
-        src: person.src,
-        date: curUnix,
-        text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed.",
-      };
-      curUnix += oneDaySeconds;
-      messages.push(message);
-    }
-    messages.reverse();
-    setMessages(messages);
-  }, [setMessages]);
+  // const fetchRandomMessages = useCallback(() => {
+  //   shuffle(persons);
+  //   const messages = [];
+  //   const iterations = persons.length;
+  //   const oneDaySeconds = 60 * 60 * 24;
+  //   let curUnix = Math.round(
+  //     new Date().getTime() / 1000 - iterations * oneDaySeconds
+  //   );
+  //   for (let i = 0; i < iterations; i += 1) {
+  //     const person = persons[i];
+  //     const message = {
+  //       id: i,
+  //       src: person.src,
+  //       date: curUnix,
+  //       text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr sed.",
+  //     };
+  //     curUnix += oneDaySeconds;
+  //     messages.push(message);
+  //   }
+  //   messages.reverse();
+  //   setMessages(messages);
+  // }, [setMessages]);
 
-  const fetchRandomPosts = useCallback(() => {
-    shuffle(persons);
-    const posts = [];
-    const iterations = persons.length;
-    const oneDaySeconds = 60 * 60 * 24;
-    let curUnix = Math.round(
-      new Date().getTime() / 1000 - iterations * oneDaySeconds
-    );
-    for (let i = 0; i < iterations; i += 1) {
-      const person = persons[i];
-      const post = {
-        id: i,
-        src: person.src,
-        timestamp: curUnix,
-        name: person.name,
-      };
-      curUnix += oneDaySeconds;
-      posts.push(post);
-    }
-    posts.reverse();
-    setPosts(posts);
-  }, [setPosts]);
+  // const fetchRandomPosts = useCallback(() => {
+  //   shuffle(persons);
+  //   const posts = [];
+  //   const iterations = persons.length;
+  //   const oneDaySeconds = 60 * 60 * 24;
+  //   let curUnix = Math.round(
+  //     new Date().getTime() / 1000 - iterations * oneDaySeconds
+  //   );
+  //   for (let i = 0; i < iterations; i += 1) {
+  //     const person = persons[i];
+  //     const post = {
+  //       id: i,
+  //       src: person.src,
+  //       timestamp: curUnix,
+  //       name: person.name,
+  //     };
+  //     curUnix += oneDaySeconds;
+  //     posts.push(post);
+  //   }
+  //   posts.reverse();
+  //   setPosts(posts);
+  // }, [setPosts]);
 
   const toggleAccountActivation = useCallback(() => {
     if (pushMessageToSnackbar) {
@@ -304,17 +305,17 @@ function Main(props) {
   );
 
   useEffect(() => {
-    fetchRandomTargets();
+    //fetchRandomTargets();
     fetchRandomStatistics();
     fetchRandomTransactions();
-    fetchRandomMessages();
-    fetchRandomPosts();
+    //fetchRandomMessages();
+    //fetchRandomPosts();
   }, [
-    fetchRandomTargets,
+    //fetchRandomTargets,
     fetchRandomStatistics,
     fetchRandomTransactions,
-    fetchRandomMessages,
-    fetchRandomPosts,
+    //fetchRandomMessages,
+    //fetchRandomPosts,
   ]);
 
   return (
@@ -326,7 +327,7 @@ function Main(props) {
       />
       <NavBar
         selectedTab={selectedTab}
-        messages={messages}
+        //messages={messages}
         openAddBalanceDialog={openAddBalanceDialog}
       />
       <ConsecutiveSnackbarMessages
