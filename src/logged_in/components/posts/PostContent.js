@@ -117,8 +117,9 @@ function PostContent(props) {
     try {
       const response = await axios.get('https://uwb-backend.onrender.com/sitesDetail', {
         params: {
-          name: post.name,
-          email: localStorage.getItem('email')
+          email: localStorage.getItem('email'),
+          name: post.name
+          
         }
       });
       console.log(response.data)
