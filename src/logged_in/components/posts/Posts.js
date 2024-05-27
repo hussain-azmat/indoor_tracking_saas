@@ -102,7 +102,10 @@ function Posts(props) {
     setSelectedSite(site || null);
     try {
       const response = await axios.get('https://uwb-backend.onrender.com/sitesDetail', {
-        params: { name: site.name }
+        params: { 
+          email: localStorage.getItem('email'),
+          name: site.name 
+        }
       });
       console.log("Site Details:", response.data);
       updateAnchors(response.data.anchors); // Update with fetched data
