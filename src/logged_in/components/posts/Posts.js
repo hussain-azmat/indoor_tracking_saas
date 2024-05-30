@@ -107,34 +107,21 @@ function Posts(props) {
           name: site.name 
         }
       });
+
+      // const updatedSite = {
+      //   ...site,
+      //   description: response.data.description
+      // };
+      //setSelectedSite(response.data.description);
       console.log("Site Details:", response.data);
       updateAnchors(response.data.anchors); // Update with fetched data
       updateNumAssets(response.data.numAssets); // Update with fetched data
+      //setSelectedSite(updatedSite);
     } catch (error) {
       console.error('Error fetching site details:', error);
     }
   }, [updateAnchors, updateNumAssets]);
 
-  // const handleSiteClick = useCallback(
-    
-  //   (site) => {
-  //     setSelectedSite(site || null);
-  //     updateAnchors(site?.anchors); // Assuming site has an anchors property
-  //     updateNumAssets(site?.numAssets); // Assuming site has a numAssets property
-  //     console.log("Site Data:", site); // Log selected site data
-  //   },
-  //   [updateAnchors, updateNumAssets]
-
-  // );
-
-  // const handleSiteClick = (site) => {
-  //   setSelectedSite(site);
-  //   console.log("Site Data:", site); // Log selected site data
-  //   //console.log("Selected Site:", selectedSite);
-  // };
-  
-  //console.log("New Post: ", posts);
-  //console.log("Post ID: ", posts.id);
 
   useEffect(() => {
     selectPosts();
@@ -142,6 +129,7 @@ function Posts(props) {
   }, [selectPosts]);
 
   useEffect(() => {
+    
     handleSiteClick(selectedSite);
     //console.log("Site Data -> useEffect:", selectedSite); // Log selected site data
   }, [handleSiteClick, selectedSite])

@@ -14,7 +14,7 @@ import {
   IconButton,
   ListItem,
   ListItemIcon,
-  ListItemText,
+  //ListItemText,
   Hidden,
   Tooltip,
   Box,
@@ -25,12 +25,12 @@ import ImageIcon from "@mui/icons-material/Image";
 //import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import MenuIcon from "@mui/icons-material/Menu";
-import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
+//import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 //import MessagePopperButton from "./MessagePopperButton";
 import SideDrawer from "./SideDrawer";
 //import Balance from "./Balance";
 import NavigationDrawer from "../../../shared/components/NavigationDrawer";
-import useMediaQuery from "@mui/material/useMediaQuery";
+//import useMediaQuery from "@mui/material/useMediaQuery";
 import { authActions } from "../redux/store";
 import { useHistory } from "react-router-dom";
 
@@ -130,12 +130,14 @@ const styles = (theme) => ({
 });
 
 function NavBar(props) {
-  const { selectedTab, classes, theme } = props;
+  const { selectedTab, classes 
+    //,theme 
+  } = props;
   // Will be use to make website more accessible by screen readers
   const links = useRef([]);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
-  const isWidthUpSm = useMediaQuery(theme.breakpoints.up("sm"));
+  //const isWidthUpSm = useMediaQuery(theme.breakpoints.up("sm"));
   //const histroy = useHistory(null);
 
   const openMobileDrawer = useCallback(() => {
@@ -165,6 +167,11 @@ function NavBar(props) {
     history.replace("/login");
     window.location.reload();
   };
+
+  // Extract username from email stored in localStorage
+  const userEmail = localStorage.getItem('email') || '';
+  const username = userEmail.split('@')[0]; // Get the part of email before '@' as username
+
 
   const menuItems = [
     {
@@ -250,7 +257,7 @@ function NavBar(props) {
             <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="logo" className={classes.logo} />
           </div>
           </Box>
-          <Box
+          {/* <Box
             display="flex"
             justifyContent="flex-end"
             alignItems="center"
@@ -283,7 +290,23 @@ function NavBar(props) {
             size="large"
           >
             <SupervisorAccountIcon />
-          </IconButton>
+          </IconButton> */}
+          <Box
+            display="flex"
+            justifyContent="flex-end"
+            alignItems="center"
+            width="100%"
+          >
+            <Typography color="textPrimary" variant="body1">{username}</Typography>
+
+            <button onClick={openDrawer} style={{ border: "none", background: "none", cursor: "pointer" }}>
+              <Avatar
+                alt="profile picture"
+                src={`${process.env.PUBLIC_URL}/images/logged_in/myProfile.jpg`}
+                className={classNames(classes.accountAvatar)}
+              />
+            </button>
+          </Box>
           <SideDrawer open={isSideDrawerOpen} onClose={closeDrawer} />
         </Toolbar>
       </AppBar>

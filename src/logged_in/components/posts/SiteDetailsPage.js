@@ -65,7 +65,8 @@ function SiteDetailsPage(props) {
   const siteSelection = useCallback((site) => {
     //console.log("ID in PC:"+ postId);
     onSiteClick(site);
-    console.log("Site Clicked");
+    console.log("Site Data:", site);
+    //console.log("Site Clicked");
     //history.push(`/site/${post.id}`);
     //history.replace(`./posts/${post.id}`);
   }, [onSiteClick]);
@@ -157,7 +158,7 @@ function SiteDetailsPage(props) {
                 
                 <BlogCard
                   title={site.name}
-                  //discription={site.discription}
+                  //description={site.description}
                   //date={blogPost.date}
                   src={`${site.src}`}
                   onSiteClick={() => siteSelection(site)}

@@ -53,7 +53,7 @@ const styles = (theme) => ({
 
 function BlogCard(props) {
   const { classes, src, title, snippet, onSiteClick, site } = props;
-  console.log("Inside BlogCard");
+  //console.log("Inside BlogCard");
   return (
     <Card className={classes.card} onClick={() => onSiteClick(site)}>
       {src && (
