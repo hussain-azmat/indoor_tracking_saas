@@ -54,7 +54,7 @@ const styles = (theme) => ({
 
 function Posts(props) {
   const {
-    selectPosts,
+    //selectPosts,
     EmojiTextArea,
     ImageCropper,
     Dropzone,
@@ -71,6 +71,7 @@ function Posts(props) {
   // eslint-disable-next-line
   const [selectedSite, setSelectedSite] = useState(null);
   
+  const [data, setdata] = useState(null);
 
   const [anchors, setAnchors] = useState([]);
   const [numAssets, setAssets] = useState([]);
@@ -100,19 +101,29 @@ function Posts(props) {
 
   const handleSiteClick = useCallback(async (site) => {
     setSelectedSite(site || null);
+    const email = localStorage.getItem('email');
+    const name = site?.name;
+    
+    console.log('Fetching site details with email:', email, 'and site name:', name);
+  
     try {
       const response = await axios.get('https://uwb-backend.onrender.com/sitesDetail', {
         params: { 
-          email: localStorage.getItem('email'),
-          name: site.name 
+          email: email,
+          name: name
         }
       });
-
+      
+      setdata(response.data);
+  
       // const updatedSite = {
       //   ...site,
       //   description: response.data.description
       // };
-      //setSelectedSite(response.data.description);
+  
+      // setSelectedSite(response.data.description);
+      console.log("Site:", data);
+      
       console.log("Site Details:", response.data);
       updateAnchors(response.data.anchors); // Update with fetched data
       updateNumAssets(response.data.numAssets); // Update with fetched data
@@ -120,18 +131,19 @@ function Posts(props) {
     } catch (error) {
       console.error('Error fetching site details:', error);
     }
-  }, [updateAnchors, updateNumAssets]);
+  }, [data, updateAnchors, updateNumAssets]);
+  
 
+  // useEffect(() => {
+  //   selectPosts();
+  //   //console.log("Site Data inside useEffect:", selectedSite); // Log selected site data
+  // }, [selectPosts]);
 
   useEffect(() => {
-    selectPosts();
-    //console.log("Site Data inside useEffect:", selectedSite); // Log selected site data
-  }, [selectPosts]);
-
-  useEffect(() => {
-    
-    handleSiteClick(selectedSite);
-    //console.log("Site Data -> useEffect:", selectedSite); // Log selected site data
+    if(selectedSite){
+      handleSiteClick(selectedSite);
+      console.log("Site Data -> useEffect:", selectedSite); // Log selected site data
+    }  
   }, [handleSiteClick, selectedSite])
 
   if (isAddPostPaperOpen) {

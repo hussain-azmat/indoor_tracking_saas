@@ -6,10 +6,9 @@ import withStyles from "@mui/styles/withStyles";
 import ZoomImage from "../../../shared/components/ZoomImage";
 import smoothScrollTop from "../../../shared/functions/smoothScrollTop";
 import Trilateration from './Trilateration';
-//import BlogCard from "../../../logged_out/components/blog/BlogCard";
-//import Posts from "./Posts";
 import BlogCard from "../../../logged_out/components/blog/BlogCard";
-//import BlogCard from "../../../logged_out/components/blog/BlogCard";
+///import { cyan } from "@mui/material/colors";
+//import Posts from "./Posts";
 //import PostContent from "./PostContent";
 
 
@@ -60,7 +59,6 @@ function SiteDetailsPage(props) {
 
   const maxX = Math.max(...anchors.map(anchor => anchor.x));
   const maxY = Math.max(...anchors.map(anchor => anchor.y));
-
 
   const siteSelection = useCallback((site) => {
     //console.log("ID in PC:"+ postId);
@@ -120,7 +118,7 @@ function SiteDetailsPage(props) {
                   }} 
                 />
                 {estimatedPosition && estimatedPosition.tagPositions.map((position, index) => {
-                  const colors = ['red', 'blue', 'green', 'yellow'];
+                  const colors = ['orange', 'violet', 'blue', 'red', 'yellow'];
                   const color = colors[index % colors.length];
                   return (
                     <div
@@ -158,7 +156,7 @@ function SiteDetailsPage(props) {
                 
                 <BlogCard
                   title={site.name}
-                  //description={site.description}
+                  description={site.description}
                   //date={blogPost.date}
                   src={`${site.src}`}
                   onSiteClick={() => siteSelection(site)}

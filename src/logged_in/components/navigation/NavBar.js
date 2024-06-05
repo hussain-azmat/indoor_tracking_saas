@@ -161,11 +161,11 @@ function NavBar(props) {
   const handleLogout = () => {
     dispatch(authActions.logout());
     // Clear authentication data from local storage
-    localStorage.clear();
+    //localStorage.clear();
   
     // Redirect to the login page
     history.replace("/login");
-    window.location.reload();
+    //window.location.reload();
   };
 
   // Extract username from email stored in localStorage
