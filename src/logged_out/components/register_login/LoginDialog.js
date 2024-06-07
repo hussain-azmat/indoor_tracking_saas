@@ -71,7 +71,7 @@ function LoginDialog(props) {
         if (result.success) {
           // Save user data to local storage
           localStorage.setItem('user', JSON.stringify(result.userWithoutPassword));
-          //localStorage.setItem('username', result?.name); // Assuming the name is returned from the backend
+          localStorage.setItem('username', result?.name); // Assuming the name is returned from the backend
           localStorage.setItem('email', data.email);
           //console.log(result.userWithoutPassword);
           //console.log(data.email);
