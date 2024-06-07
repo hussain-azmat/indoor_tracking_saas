@@ -140,6 +140,8 @@ function NavBar(props) {
   //const isWidthUpSm = useMediaQuery(theme.breakpoints.up("sm"));
   //const histroy = useHistory(null);
 
+  const defaultProfilePic = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Windows_10_Default_Profile_Picture.svg/2048px-Windows_10_Default_Profile_Picture.svg.png";
+
   const openMobileDrawer = useCallback(() => {
     setIsMobileOpen(true);
   }, [setIsMobileOpen]);
@@ -309,7 +311,7 @@ function NavBar(props) {
             <button onClick={openDrawer} style={{ border: "none", background: "none", cursor: "pointer" }}>
               <Avatar
                 alt="profile picture"
-                src={`${profile_pic}`}
+                src={profile_pic ? profile_pic : defaultProfilePic}
                 className={classNames(classes.accountAvatar)}
               />
             </button>

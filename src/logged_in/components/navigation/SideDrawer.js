@@ -153,6 +153,12 @@ function SideDrawer(props) {
     setShowPasswordFields(!showPasswordFields);
   };
 
+  const formatDateForInput = (date) => {
+    if (!date) return "";
+    const d = new Date(date);
+    return d instanceof Date && !isNaN(d) ? d.toISOString().substring(0, 10) : "";
+  };
+
   return (
     <Drawer
       anchor="right"
@@ -236,7 +242,8 @@ function SideDrawer(props) {
             label="Date of Birth"
             name="dateofBirth"
             type="date"
-            value={profileData.dateofBirth ? profileData.dateofBirth.toISOString().split('T')[0] : ""} // Format date as YYYY-MM-DD
+            value={formatDateForInput(profileData.dateofBirth)}
+            //value={profileData.dateofBirth ? profileData.dateofBirth.toISOString().split('T')[0] : ""} // Format date as YYYY-MM-DD
             onChange={handleChange}
             fullWidth
             margin="normal"
@@ -295,7 +302,9 @@ function SideDrawer(props) {
             variant="contained"
             color="primary"
             fullWidth
+            
             className={classes.saveButton}
+            
           >
             Save
           </Button>
