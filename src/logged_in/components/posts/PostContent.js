@@ -51,8 +51,10 @@ function PostContent(props) {
           id: index,
           src: item.imageUrl,
           name: item.name,
+          description: item.description,
         }));
 
+        console.log(response.data);
         setPosts(formattedPosts);
       } catch (error) {
         console.error('Error fetching data:', error);

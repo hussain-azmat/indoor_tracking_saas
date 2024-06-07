@@ -169,10 +169,17 @@ function NavBar(props) {
   };
 
   // Extract username from email stored in localStorage
-  const userEmail = localStorage.getItem('email') || '';
-  const username = userEmail.split('@')[0]; // Get the part of email before '@' as username
+  // const userEmail = localStorage.getItem('email') || '';
+  // const username = userEmail.split('@')[0]; // Get the part of email before '@' as username
 
-
+  //const userEmail = localStorage.getItem('result.userWithoutPassword.email') || '';
+  // Retrieve user data from local storage
+  const userDataString = localStorage.getItem('user');
+  const userData = userDataString ? JSON.parse(userDataString) : null;
+  const username = userData ? userData.name : '';
+  const profile_pic = userData ? userData.profilePic : '';
+  //console.log(profile_pic);
+  
   const menuItems = [
     {
       link: "/c/dashboard",
@@ -302,7 +309,7 @@ function NavBar(props) {
             <button onClick={openDrawer} style={{ border: "none", background: "none", cursor: "pointer" }}>
               <Avatar
                 alt="profile picture"
-                src={`${process.env.PUBLIC_URL}/images/logged_in/myProfile.jpg`}
+                src={`${profile_pic}`}
                 className={classNames(classes.accountAvatar)}
               />
             </button>

@@ -54,7 +54,7 @@ const styles = (theme) => ({
 
 function Posts(props) {
   const {
-    //selectPosts,
+    selectPosts,
     EmojiTextArea,
     ImageCropper,
     Dropzone,
@@ -134,10 +134,10 @@ function Posts(props) {
   }, [data, updateAnchors, updateNumAssets]);
   
 
-  // useEffect(() => {
-  //   selectPosts();
-  //   //console.log("Site Data inside useEffect:", selectedSite); // Log selected site data
-  // }, [selectPosts]);
+  useEffect(() => {
+    selectPosts();
+    //console.log("Site Data inside useEffect:", selectedSite); // Log selected site data
+  }, [selectPosts]);
 
   useEffect(() => {
     if(selectedSite){
