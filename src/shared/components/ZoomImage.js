@@ -45,9 +45,16 @@ function ZoomImage(props) {
   const [zoomedIn, setZoomedIn] = useState(false);
   const [scrollbarSize, setScrollbarSize] = useState(null);
 
-  const zoomIn = useCallback(() => {
+  // const zoomIn = useCallback(() => {
+  //   setZoomedIn(true);
+  // }, [setZoomedIn]);
+  const zoomIn = useCallback((e) => {
+    if (e.target.closest('a')) {
+      // Prevent zooming if the image is inside a link
+      return;
+    }
     setZoomedIn(true);
-  }, [setZoomedIn]);
+  }, []);
 
   const zoomOut = useCallback(() => {
     setZoomedIn(false);

@@ -133,11 +133,14 @@ function HeadSection(props) {
                   </Grid>
                   <Hidden mdDown>
                     <Grid item md={6}>
+                    <a href="https://tpltrakker.com/solution/" target="_blank" rel="noopener noreferrer">
                       <ZoomImage
                         src={`${process.env.PUBLIC_URL}/images/logged_out/headerImage.jpg`}
                         className={classes.image}
                         alt="header example"
+                        //onClick={() => window.location.href = 'https://tpltrakker.com/'} // Change to your desired URL
                       />
+                      </a>
                     </Grid>
                   </Hidden>
                 </Box>
