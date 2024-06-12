@@ -71,7 +71,7 @@ function Posts(props) {
   // eslint-disable-next-line
   const [selectedSite, setSelectedSite] = useState(null);
   
-  const [data, setdata] = useState(null);
+  //const [data, setdata] = useState(null);
 
   const [anchors, setAnchors] = useState([]);
   const [numAssets, setAssets] = useState([]);
@@ -114,7 +114,7 @@ function Posts(props) {
         }
       });
       
-      setdata(response.data);
+      //setdata(response.data);
   
       // const updatedSite = {
       //   ...site,
@@ -122,7 +122,7 @@ function Posts(props) {
       // };
   
       // setSelectedSite(response.data.description);
-      console.log("Site:", data);
+      //console.log("Site:", data);
       
       console.log("Site Details:", response.data);
       updateAnchors(response.data.anchors); // Update with fetched data
@@ -131,7 +131,7 @@ function Posts(props) {
     } catch (error) {
       console.error('Error fetching site details:', error);
     }
-  }, [data, updateAnchors, updateNumAssets]);
+  }, [updateAnchors, updateNumAssets]);
   
 
   useEffect(() => {
@@ -142,7 +142,7 @@ function Posts(props) {
   useEffect(() => {
     if(selectedSite){
       handleSiteClick(selectedSite);
-      console.log("Site Data -> useEffect:", selectedSite); // Log selected site data
+      //console.log("Site Data -> useEffect:", selectedSite); // Log selected site data
     }  
   }, [handleSiteClick, selectedSite])
 

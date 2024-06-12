@@ -170,11 +170,7 @@ function NavBar(props) {
     //window.location.reload();
   };
 
-  // Extract username from email stored in localStorage
-  // const userEmail = localStorage.getItem('email') || '';
-  // const username = userEmail.split('@')[0]; // Get the part of email before '@' as username
 
-  //const userEmail = localStorage.getItem('result.userWithoutPassword.email') || '';
   // Retrieve user data from local storage
   const userDataString = localStorage.getItem('user');
   const userData = userDataString ? JSON.parse(userDataString) : null;
