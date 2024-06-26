@@ -15,7 +15,7 @@ function StatisticsArea(props) {
           <CardChart
             data={data.profit}
             color={theme.palette.secondary.light}
-            height="70px"
+            height="200px"
             title="Sites"
           />
         </Grid>
@@ -23,7 +23,7 @@ function StatisticsArea(props) {
           <CardChart
             data={data.views}
             color={theme.palette.primary.light}
-            height="70px"
+            height="200px"
             title="Assets"
           />
         </Grid>

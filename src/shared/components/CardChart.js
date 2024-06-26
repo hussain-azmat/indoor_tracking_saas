@@ -34,12 +34,12 @@ function calculateMin(data, yKey, factor) {
 }
 
 const itemHeight = 216;
-const options = ["1 Week", "1 Month", "6 Months"];
+const options = ["1 Month", "6 Months", "1 Year"];
 
 function CardChart(props) {
   const { color, data, title, classes, theme, height } = props;
   const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedOption, setSelectedOption] = useState("1 Month");
+  const [selectedOption, setSelectedOption] = useState("6 Months");
 
   const handleClick = useCallback(
     (event) => {
@@ -57,12 +57,12 @@ function CardChart(props) {
 
   const getSubtitle = useCallback(() => {
     switch (selectedOption) {
-      case "1 Week":
-        return "Last week";
       case "1 Month":
         return "Last month";
       case "6 Months":
         return "Last 6 months";
+      case "1 Year":
+        return "Last Year";
       default:
         throw new Error("No branch selected in switch-statement");
     }
@@ -71,14 +71,15 @@ function CardChart(props) {
   const processData = useCallback(() => {
     let seconds;
     switch (selectedOption) {
-      case "1 Week":
-        seconds = 60 * 60 * 24 * 7;
-        break;
       case "1 Month":
         seconds = 60 * 60 * 24 * 31;
         break;
       case "6 Months":
-        seconds = 60 * 60 * 24 * 31 * 6;
+        seconds = 60 * 60 * 24 * 155;
+        break;
+      case "1 Year":
+        //seconds = 60 * 60 * 24 * 7;
+        seconds = 60 * 60 * 24 * 365;
         break;
       default:
         throw new Error("No branch selected in switch-statement");
